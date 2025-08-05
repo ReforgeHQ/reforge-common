@@ -1,16 +1,16 @@
 import type {
-  Prefab,
+  Reforge,
   ConfigRow,
   ConfigValue,
   Provided,
   ConditionalValue,
-} from "@prefab-cloud/prefab-cloud-node";
-import { ConfigType, ConfigValueType } from "@prefab-cloud/prefab-cloud-node";
+} from "@reforge-com/node";
+import { ConfigType, ConfigValueType } from "@reforge-com/node";
 
 export type Logger = (category: any, message: unknown) => void;
 
 export type Config = Exclude<
-  ReturnType<typeof Prefab.prototype.raw>,
+  ReturnType<typeof Reforge.prototype.raw>,
   undefined
 >;
 
@@ -22,7 +22,7 @@ type NewConfig = Omit<
 type NewFlag = Omit<Config, "id" | "createdAt" | "updatedAt" | "changedBy">;
 
 export type GetValue = Exclude<
-  ReturnType<typeof Prefab.prototype.get>,
+  ReturnType<typeof Reforge.prototype.get>,
   undefined
 >;
 

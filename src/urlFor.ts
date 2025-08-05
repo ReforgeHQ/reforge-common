@@ -1,15 +1,15 @@
-import type { Prefab } from "@prefab-cloud/prefab-cloud-node";
+import type { Reforge } from "@reforge-com/node";
 import { ConfigType, type Config } from "./types.js";
 
 const CONFIG_TYPES = [ConfigType.CONFIG, "CONFIG"];
 const FF_CONFIG_TYPES = [ConfigType.FEATURE_FLAG, "FEATURE_FLAG"];
 
 export const urlForKey = (
-  prefab: Prefab,
+  reforge: Reforge,
   apiUrl: string | undefined,
-  key: string
+  key: string,
 ) => {
-  const config = prefab.raw(key);
+  const config = reforge.raw(key);
 
   if (!config) {
     return;

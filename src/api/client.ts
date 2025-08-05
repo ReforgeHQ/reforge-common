@@ -37,7 +37,7 @@ export class Client {
       "Content-Type": "application/json",
       Accept: "application/json",
       Authorization: `Basic ${token}`,
-      "X-PrefabCloud-Client-Version": `prefab-lsp-${this.clientIdentifier}`,
+      "X-Reforge-Client-Version": `reforge-lsp-${this.clientIdentifier}`,
     };
 
     const uri = new URL(this.apiUrl + "/" + requestPath.replace(/^\//, ""));

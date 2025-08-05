@@ -21,7 +21,7 @@ describe("apiClient", () => {
         Accept: "application/json",
         Authorization: "Basic YXV0aHVzZXI6YWJjZGVmZw==",
         "Content-Type": "application/json",
-        "X-PrefabCloud-Client-Version": `prefab-lsp-${clientIdentifier}`,
+        "X-Reforge-Client-Version": `reforge-lsp-${clientIdentifier}`,
       });
     });
 

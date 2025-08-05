@@ -1,6 +1,6 @@
 {
-  "dependencies": {
-    "@prefab-cloud/prefab-cloud-node": "^0.4.2"
+  "peerDependencies": {
+    "@reforge-com/node": "^0"
   },
   "type": "module",
   "devDependencies": {

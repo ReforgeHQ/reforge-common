@@ -18,7 +18,7 @@ export const getConfigFromApi = async ({
     const text = response.text();
     const statusText = response.statusText;
 
-    errorLog("PrefabClient", {
+    errorLog("ReforgeClient", {
       message: "Error fetching config",
       response,
       text,

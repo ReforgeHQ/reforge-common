@@ -18,7 +18,7 @@ export const getEnvironmentsFromApi = async ({
   const response = await client.get(requestPath);
 
   if (response.status !== 200) {
-    log("PrefabClient", {
+    log("ReforgeClient", {
       message: "Error fetching environments",
       response,
     });
