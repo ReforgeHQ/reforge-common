@@ -1,6 +1,6 @@
 export type ProjectEnvId = {
   id: string;
-  projectId: string;
+  projectId: number;
 };
 
 export const getProjectEnvFromSdkKey = (
@@ -16,7 +16,7 @@ export const getProjectEnvFromSdkKey = (
     throw new Error("Invalid SDK key");
   }
 
-  const projectId = parts[1];
+  const projectId = Number.parseInt(parts[1], 10);
   const projectEnvId = parts[2];
 
   if (!projectEnvId || !projectId) {
@@ -24,7 +24,7 @@ export const getProjectEnvFromSdkKey = (
   }
 
   return {
-    projectId,
     id: projectEnvId,
+    projectId,
   };
 };

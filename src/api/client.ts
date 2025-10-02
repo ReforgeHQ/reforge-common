@@ -1,3 +1,5 @@
+import { jsonStringifyWithBigInt } from "@reforge-com/node";
+
 import { type Logger } from "../types.js";
 
 const DEFAULT_API_URL = "https://api.prefab.cloud";
@@ -64,7 +66,7 @@ export class Client {
     return fetch(uri, {
       method: "POST",
       headers,
-      body: JSON.stringify(payload),
+      body: jsonStringifyWithBigInt(payload),
     });
   }
 }

@@ -1,4 +1,4 @@
-import type {Config, ConfigValueType} from './types.js'
+import {Config, ConfigValueType} from './types.js'
 
 export const valueTypeStringForConfig = (config: Config) => {
   const valueType: string | undefined = valueTypeString(config.valueType)
@@ -14,27 +14,28 @@ export const valueTypeStringForConfig = (config: Config) => {
 
 export const valueTypeString = (valueType: ConfigValueType) => {
   switch (valueType) {
-    case 1:
+    case ConfigValueType.Int:
       return 'int'
-    case 2:
+    case ConfigValueType.String:
       return 'string'
-    case 3:
+    case ConfigValueType.Bytes:
       return 'bytes'
-    case 4:
+    case ConfigValueType.Double:
       return 'double'
-    case 5:
+    case ConfigValueType.Bool:
       return 'bool'
-    case 7:
+    case ConfigValueType.LimitDefinition:
       return 'limitDefinition'
-    case 9:
+    case ConfigValueType.LogLevel:
       return 'logLevel'
-    case 10:
+    case ConfigValueType.StringList:
       return 'stringList'
-    case 11:
+    case ConfigValueType.IntRange:
       return 'intRange'
-    case 13:
+    case ConfigValueType.Json:
       return 'json'
     default:
-      return undefined
+      // eslint-disable-next-line no-useless-return
+      return;
   }
 }
