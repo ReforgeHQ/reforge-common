@@ -3,15 +3,15 @@ import { describe, expect, it } from "bun:test";
 import { Client } from "./client.js";
 
 const clientIdentifier = "vscode-1.2.3";
-const apiKey = "abcdefg";
+const sdkKey = "abcdefg";
 const log = () => {};
 
 describe("apiClient", () => {
   describe("uriAndHeaders", () => {
-    it("generates headers based on the version and api key", () => {
+    it("generates headers based on the version and sdk key", () => {
       const client = new Client({
         log,
-        apiKey,
+        sdkKey,
         clientIdentifier,
       });
 
@@ -28,7 +28,7 @@ describe("apiClient", () => {
     it("can return a prod uri", () => {
       const client = new Client({
         log,
-        apiKey,
+        sdkKey,
         clientIdentifier,
       });
 
@@ -40,7 +40,7 @@ describe("apiClient", () => {
     it("doesn't duplicate slashes if the path starts with a slash", () => {
       const client = new Client({
         log,
-        apiKey,
+        sdkKey,
         clientIdentifier,
       });
 
@@ -52,7 +52,7 @@ describe("apiClient", () => {
     it("can return a staging uri", () => {
       const client = new Client({
         log,
-        apiKey,
+        sdkKey,
         apiUrl: "https://api.staging-prefab.cloud",
         clientIdentifier,
       });

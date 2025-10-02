@@ -3,18 +3,18 @@ import { type Logger } from "../types.js";
 const DEFAULT_API_URL = "https://api.prefab.cloud";
 
 export class Client {
-  private apiKey: string;
+  private sdkKey: string;
   private apiUrl: string;
   private clientIdentifier: string;
   private log: (args: any) => void;
 
   constructor({
-    apiKey,
+    sdkKey,
     clientIdentifier,
     apiUrl,
     log,
   }: {
-    apiKey: string | undefined;
+    sdkKey: string | undefined;
     clientIdentifier: string;
     apiUrl?: string;
     log: Logger;
@@ -22,16 +22,16 @@ export class Client {
     this.apiUrl = (apiUrl || DEFAULT_API_URL).replace(/\/$/, "");
     this.clientIdentifier = clientIdentifier;
 
-    if (!apiKey) {
-      throw new Error("No API key set. Please update your configuration.");
+    if (!sdkKey) {
+      throw new Error("No SDK key set. Please update your configuration.");
     }
 
-    this.apiKey = apiKey;
+    this.sdkKey = sdkKey;
     this.log = (args: any) => log("ApiClient", args);
   }
 
   uriAndHeaders(requestPath: string) {
-    const token = Buffer.from(`authuser:${this.apiKey}`).toString("base64");
+    const token = Buffer.from(`authuser:${this.sdkKey}`).toString("base64");
 
     const headers = {
       "Content-Type": "application/json",

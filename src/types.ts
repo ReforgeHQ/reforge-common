@@ -1,10 +1,11 @@
 import type {
-  Reforge,
+  ConditionalValue,
   ConfigRow,
   ConfigValue,
   Provided,
-  ConditionalValue,
+  Reforge,
 } from "@reforge-com/node";
+
 import { ConfigType, ConfigValueType } from "@reforge-com/node";
 
 export type Logger = (category: any, message: unknown) => void;
