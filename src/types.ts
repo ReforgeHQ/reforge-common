@@ -1,13 +1,20 @@
-import type {
-  Reforge,
-  ConfigRow,
-  ConfigValue,
-  Provided,
-  ConditionalValue,
+import  {
+  ConfigType,
+  type Reforge,
 } from "@reforge-com/node";
-import { ConfigType, ConfigValueType } from "@reforge-com/node";
+export  {
+  type ConditionalValue,
+  type ConfigRow,
+  ConfigType,
+  type ConfigValue,
+  ConfigValueType,
+  type Provided,
+  type Reforge,
+} from "@reforge-com/node";
 
-export type Logger = (category: any, message: unknown) => void;
+import {  } from "@reforge-com/node";
+
+export type Logger = (category: string | unknown, message: unknown) => void;
 
 export type Config = Exclude<
   ReturnType<typeof Reforge.prototype.raw>,
@@ -29,12 +36,6 @@ export type GetValue = Exclude<
 export type ConfigTypeValue = (typeof ConfigType)[keyof typeof ConfigType];
 
 export {
-  ConditionalValue,
-  ConfigRow,
-  ConfigType,
-  ConfigValue,
-  ConfigValueType,
   NewConfig,
   NewFlag,
-  Provided,
 };

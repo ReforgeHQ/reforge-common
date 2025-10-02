@@ -13,7 +13,7 @@ export const getEnvironmentsFromApi = async ({
   client: Client;
   log: Logger;
 }): Promise<Environment[]> => {
-  const requestPath = "/api/v1/project-environments";
+  const requestPath = "/api/v2/project-environments";
 
   const response = await client.get(requestPath);
 

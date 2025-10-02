@@ -1,8 +1,9 @@
 import type { Reforge } from "@reforge-com/node";
-import { ConfigType, type Config } from "./types.js";
 
-const CONFIG_TYPES = [ConfigType.CONFIG, "CONFIG"];
-const FF_CONFIG_TYPES = [ConfigType.FEATURE_FLAG, "FEATURE_FLAG"];
+import { type Config, ConfigType } from "./types.js";
+
+const CONFIG_TYPES = new Set([ConfigType.Config, "CONFIG"]);
+const FF_CONFIG_TYPES = new Set([ConfigType.FeatureFlag, "FEATURE_FLAG"]);
 
 export const urlForKey = (
   reforge: Reforge,
@@ -26,11 +27,11 @@ export const urlFor = (apiUrl: string | undefined, config: Config) => {
     ? apiUrl.replace(/api\./, "app.").replace(/\/$/, "")
     : "https://app.prefab.cloud";
 
-  if (FF_CONFIG_TYPES.includes(config.configType)) {
+  if (FF_CONFIG_TYPES.has(config.configType)) {
     return `${urlBase}/account/projects/${projectId}/flags/${key}`;
   }
 
-  if (CONFIG_TYPES.includes(config.configType)) {
+  if (CONFIG_TYPES.has(config.configType)) {
     return `${urlBase}/account/projects/${projectId}/configs/${key}`;
   }
 
