@@ -5,18 +5,21 @@ import { type Logger } from "../types.js";
 const DEFAULT_API_URL = "https://api.prefab.cloud";
 
 export class Client {
-  private sdkKey: string;
+  private sdkKey?: string;
+  private jwt?: string;
   private apiUrl: string;
   private clientIdentifier: string;
   private log: (args: any) => void;
 
   constructor({
     sdkKey,
+    jwt,
     clientIdentifier,
     apiUrl,
     log,
   }: {
-    sdkKey: string | undefined;
+    sdkKey?: string;
+    jwt?: string;
     clientIdentifier: string;
     apiUrl?: string;
     log: Logger;
@@ -24,21 +27,29 @@ export class Client {
     this.apiUrl = (apiUrl || DEFAULT_API_URL).replace(/\/$/, "");
     this.clientIdentifier = clientIdentifier;
 
-    if (!sdkKey) {
-      throw new Error("No SDK key set. Please update your configuration.");
+    if (!sdkKey && !jwt) {
+      throw new Error("Either SDK key or JWT must be provided");
     }
 
     this.sdkKey = sdkKey;
+    this.jwt = jwt;
     this.log = (args: any) => log("ApiClient", args);
   }
 
   uriAndHeaders(requestPath: string) {
-    const token = Buffer.from(`authuser:${this.sdkKey}`).toString("base64");
+    let authorization: string;
+
+    if (this.jwt) {
+      authorization = `Bearer ${this.jwt}`;
+    } else {
+      const token = Buffer.from(`authuser:${this.sdkKey}`).toString("base64");
+      authorization = `Basic ${token}`;
+    }
 
     const headers = {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: `Basic ${token}`,
+      Authorization: authorization,
       "X-Reforge-Client-Version": `reforge-lsp-${this.clientIdentifier}`,
     };
 
@@ -51,6 +62,13 @@ export class Client {
     const { uri, headers } = this.uriAndHeaders(requestPath);
 
     this.log({ GET: { uri } });
+
+    // Generate curl command for debugging
+    const headerFlags = Object.entries(headers)
+      .map(([key, value]) => `-H '${key}: ${value}'`)
+      .join(' ');
+    const curlCommand = `curl -X GET ${headerFlags} '${uri}'`;
+    this.log({ curl: curlCommand });
 
     return fetch(uri, {
       method: "GET",
