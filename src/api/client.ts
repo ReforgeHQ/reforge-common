@@ -63,13 +63,6 @@ export class Client {
 
     this.log({ GET: { uri } });
 
-    // Generate curl command for debugging
-    const headerFlags = Object.entries(headers)
-      .map(([key, value]) => `-H '${key}: ${value}'`)
-      .join(' ');
-    const curlCommand = `curl -X GET ${headerFlags} '${uri}'`;
-    this.log({ curl: curlCommand });
-
     return fetch(uri, {
       method: "GET",
       headers,
