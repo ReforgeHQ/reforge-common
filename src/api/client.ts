@@ -80,4 +80,16 @@ export class Client {
       body: jsonStringifyWithBigInt(payload),
     });
   }
+
+  async put(requestPath: string, payload: unknown) {
+    const { uri, headers } = this.uriAndHeaders(requestPath);
+
+    this.log({ PUT: { uri, payload } });
+
+    return fetch(uri, {
+      method: "PUT",
+      headers,
+      body: jsonStringifyWithBigInt(payload),
+    });
+  }
 }
