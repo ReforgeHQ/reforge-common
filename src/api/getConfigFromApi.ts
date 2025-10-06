@@ -10,7 +10,7 @@ export const getConfigFromApi = async ({
   errorLog: Logger;
   key: string;
 }): Promise<Config | undefined> => {
-  const requestPath = `/api/v2/config/key/${encodeURIComponent(key)}`;
+  const requestPath = `/api/v1/config/key/${encodeURIComponent(key)}`;
 
   const response = await client.get(requestPath);
 

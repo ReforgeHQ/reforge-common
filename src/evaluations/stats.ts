@@ -50,7 +50,7 @@ export const getEvaluationStats = async ({
   log: Logger;
 }): Promise<EvaluationStats | null> => {
   const request = await client.get(
-    `/api/v2/evaluation-stats/${encodeURIComponent(key)}`
+    `/api/v1/evaluation-stats/${encodeURIComponent(key)}`
   );
 
   if (request.status !== 200) {
